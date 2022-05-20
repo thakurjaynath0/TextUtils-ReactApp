@@ -32,6 +32,13 @@ export default function Form(props) {
       props.showAlert('Text copied to clipboard!', 'success')
       navigator.clipboard.writeText(texts)
     }
+
+    const removeExtraSpaces = () => {
+      let newText = text.split(/[ ]+/);
+      setText(newText.join(' '))
+    }
+
+
     // const convertToCapitalLetter = () => {
     //   const noOfWords = text.trim().split(" ")[0] ? text.trim().split(" ").length : 0
     //   const word = text.trim().split(" ")
@@ -43,7 +50,6 @@ export default function Form(props) {
     // }
     
 
-
   return (
     <div>
       <div className="container my-3" style={{color: props.mode === 'light' ? 'black' : 'white'}}>
@@ -53,8 +59,9 @@ export default function Form(props) {
         </div>
       <button type="submit" className="btn btn-primary me-3" onClick={handleUpClick}>Covert to Uppercase</button>
       <button type="submit" className="btn btn-primary me-3" onClick={handleDnClick}>Covert to Lowercase</button>
-      <button type="submit" className="btn btn-primary me-3" onClick={clearText}>Clear Text</button>
       <button type="submit" className="btn btn-primary me-3" onClick={handleCopy}>Copy Text</button>
+      <button type="submit" className="btn btn-primary me-3" onClick={removeExtraSpaces}>Remove Extra Spaces</button>
+      <button type="submit" className="btn btn-primary me-3" onClick={clearText}>Clear Text</button>
       </div>
       <div className="container my-3" style={{color: props.mode === 'light' ? 'black' : 'white'}}>
           <h2>Preview</h2>

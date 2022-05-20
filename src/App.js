@@ -7,7 +7,7 @@ import About from './components/About';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
 } from "react-router-dom";
 
 function App() {
