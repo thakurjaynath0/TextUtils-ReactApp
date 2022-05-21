@@ -26,11 +26,10 @@ export default function Form(props) {
       props.showAlert('Text cleared!', 'success')
     }
 
-    const handleCopy = (e) => {
-      const texts = document.getElementById('myBox')
-      texts.select()
+    const handleCopy = () => {
+      navigator.clipboard.writeText(text)
       props.showAlert('Text copied to clipboard!', 'success')
-      navigator.clipboard.writeText(texts)
+      // document.getSelection().removeAllRanges()
     }
 
     const removeExtraSpaces = () => {
@@ -53,21 +52,22 @@ export default function Form(props) {
   return (
     <div>
       <div className="container my-3" style={{color: props.mode === 'light' ? 'black' : 'white'}}>
-          <h1>{props.heading}</h1>
+          <h1 className="mb-3" >{props.heading}</h1>
         <div className="mb-3">
-          <textarea className="form-control" placeholder="Enter text here" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode === 'light' ? 'white' : 'grey', color: props.mode === 'light' ? 'black' : 'white'}} id="myBox" rows="8" />
+          <textarea className="form-control" placeholder="Enter text here" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode === 'light' ? 'white' : '#212529', color: props.mode === 'light' ? 'black' : 'white'}} id="myBox" rows="8" />
         </div>
-      <button type="submit" className="btn btn-primary me-3" onClick={handleUpClick}>Covert to Uppercase</button>
-      <button type="submit" className="btn btn-primary me-3" onClick={handleDnClick}>Covert to Lowercase</button>
-      <button type="submit" className="btn btn-primary me-3" onClick={handleCopy}>Copy Text</button>
-      <button type="submit" className="btn btn-primary me-3" onClick={removeExtraSpaces}>Remove Extra Spaces</button>
-      <button type="submit" className="btn btn-primary me-3" onClick={clearText}>Clear Text</button>
+      <button disabled={text.trim().length === 0} type="submit" className="btn btn-primary me-3 my-1" onClick={handleUpClick}>Covert to Uppercase</button>
+      <button disabled={text.trim().length === 0} type="submit" className="btn btn-primary me-3 my-1" onClick={handleDnClick}>Covert to Lowercase</button>
+      <button disabled={text.trim().length === 0} type="submit" className="btn btn-primary me-3 my-1" onClick={handleCopy}>Copy Text</button>
+      <button disabled={text.trim().length === 0} type="submit" className="btn btn-primary me-3 my-1" onClick={removeExtraSpaces}>Remove Extra Spaces</button>
+      <button disabled={text.trim().length === 0} type="submit" className="btn btn-primary me-3 my-1" onClick={clearText}>Clear Text</button>
       </div>
       <div className="container my-3" style={{color: props.mode === 'light' ? 'black' : 'white'}}>
           <h2>Preview</h2>
-          <p>{text.length>0 ? text : 'Enter something in textbox to preview'}</p>
+          <p>{text.length>0 ? text : 'Nothing to preview'}</p>
           <h4>Your Text Summary</h4>
-          <p>{text.trim().split(" ")[0] ? text.trim().split(" ").length : 0} words and {text.trim().length} characters.</p>
+          {/* <p>{text.trim().split(" ")[0] ? text.trim().split(" ").length : 0} words and {text.trim().length} characters.</p> */}
+          <p>{text.trim().split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.trim().length} characters.</p>
           <h4>Average time to read above text</h4>
           <p>It can be read {0.008 * (text.trim().split(" ").length)} minutes.</p>
 

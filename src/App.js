@@ -52,9 +52,9 @@ function App() {
        <Navbar  title='TitleUtils' homeText='Home' aboutText='About' mode={mode} toggleMode={toggleMode} />
        <Alert alert={alert}/>
        <Routes>
-          <Route exact path="/about" element={<About/>} />
+          <Route exact path="/about" element={<About mode={mode} />} />
           <Route exact path="/" element={
-          <Form showAlert={showAlert} heading='Enter the text to analyze below' mode={mode} /> 
+          <Form showAlert={showAlert} heading='Try TextUtils - Word Counter, Character Counter...' mode={mode} /> 
           }/>
         </Routes>
      </Router>

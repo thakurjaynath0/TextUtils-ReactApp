@@ -1,31 +1,41 @@
-import React, {useState} from "react";
+import React from "react";
 
-export default function About() {
-    const [myStyle, setMyStyle] = useState({
-        color: 'black',
-        backgroundColor: 'white'
-    })
+export default function About(props) {
 
-    const [btntext, setBtnText] = useState('Enable dark mode')
+    // const [myStyle, setMyStyle] = useState({
+    //     color: 'black',
+    //     backgroundColor: 'white'
+    // })
 
-    const toggleStyle = () => {
-        if(myStyle.color === 'black') {
-            setMyStyle({
-                color: 'white',
-                backgroundColor: 'black',
-                border: '1px solid white',
-                borderRadius: '2px'
-            })
-            setBtnText('Enable light mode')
-        }else {
-            setMyStyle({
-                color: 'black',
-                backgroundColor: 'white',
-            })
-            setBtnText("Enable dark mode")
-        }
-    }
+    // const [btntext, setBtnText] = useState('Enable dark mode')
 
+    // const toggleStyle = () => {
+    //     if(myStyle.color === 'black') {
+    //         setMyStyle({
+    //             color: 'white',
+    //             backgroundColor: 'black',
+    //             border: '1px solid white',
+    //             borderRadius: '2px'
+    //         })
+    //         setBtnText('Enable light mode')
+    //     }else {
+    //         setMyStyle({
+    //             color: 'black',
+    //             backgroundColor: 'white',
+    //         })
+    //         setBtnText("Enable dark mode")
+    //     }
+    // }
+
+
+   let myStyle = {
+     color: props.mode === 'dark' ? 'white' : 'black',
+     backgroundColor: props.mode === 'dark' ? '#1a1c1f' : 'white',
+    //  border: '2px solid',
+    //  borderColor: props.mode === 'dark' ? 'white' : 'black',
+   }
+
+   
   return (
     <div className="container my-3" style={myStyle}>
         <h1>About Us</h1>
@@ -127,9 +137,9 @@ export default function About() {
           </div>
         </div>
       </div>
-      <div className="container my-3">
+      {/* <div className="container my-3">
       <button type="submit" onClick={toggleStyle} className="btn btn-dark">{btntext}</button>
-      </div>
+      </div> */}
     </div>
   );
 }
